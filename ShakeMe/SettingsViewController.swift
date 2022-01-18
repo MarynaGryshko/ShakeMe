@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewController: UIViewController
 {
-    var messages: [Message] = [Message(body:"Just do it!"),Message(body:"Never give up!"), Message(body:"Believe in yourself!"), Message(body:"Don't touch it!")]
+    var messages: [Message] = [Message(answer: "Just do it!"),Message(answer: "Never give up!"), Message(answer: "Believe in yourself!"), Message(answer: "Don't touch it!")]
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController
          }
          alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { (UIAlertAction) in
              let content = alert.textFields![0] as UITextField
-             self.messages.append(Message(body: content.text!))
+             self.messages.append(Message(answer: content.text!))
              self.tableView.reloadData()
          }))
          alert.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
@@ -43,7 +43,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Const.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = messages[indexPath.row].body
+        cell.textLabel?.text = messages[indexPath.row].answer
         return cell
     }
 }

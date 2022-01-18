@@ -74,7 +74,7 @@
         <!--Home-->
         <scene sceneID="TrH-mZ-Z5R">
             <objects>
-                <viewController id="rSq-6a-WJn" sceneMemberID="viewController">
+                <viewController id="rSq-6a-WJn" customClass="MainViewController" customModule="ShakeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5S2-kr-1L8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,15 +85,32 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-7p-mvy">
+                                <rect key="frame" x="173.5" y="744" width="67" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="67" id="uIU-Qe-6ir"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok"/>
+                                <connections>
+                                    <action selector="okButtonTapped:" destination="rSq-6a-WJn" eventType="touchUpInside" id="rAW-iY-e3N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mNx-Pb-719"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cU9-zb-G9O" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="a6w-6J-dVF"/>
                             <constraint firstItem="cU9-zb-G9O" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="bRg-h8-ikp"/>
+                            <constraint firstItem="mNx-Pb-719" firstAttribute="bottom" secondItem="gI8-7p-mvy" secondAttribute="bottom" constant="38" id="n9d-Tb-ZU9"/>
+                            <constraint firstItem="gI8-7p-mvy" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="nxw-Bh-aoZ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" selectedImage="house" catalog="system" id="LsH-Sl-x9B"/>
+                    <connections>
+                        <outlet property="answerText" destination="cU9-zb-G9O" id="O66-pe-NsU"/>
+                        <outlet property="okButton" destination="gI8-7p-mvy" id="TU1-1K-OmE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sut-NC-HO3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
