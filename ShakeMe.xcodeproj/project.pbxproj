@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C4995362796B0300076FBF8 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4995352796B0300076FBF8 /* DataManager.swift */; };
+		9C7F30E227980CFD0008D649 /* AddDefaultAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7F30E127980CFD0008D649 /* AddDefaultAnswerViewController.swift */; };
 		9C88612B278F0998008D2B4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C88612A278F0998008D2B4D /* AppDelegate.swift */; };
 		9C88612D278F0998008D2B4D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C88612C278F0998008D2B4D /* SceneDelegate.swift */; };
 		9C88612F278F0998008D2B4D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C88612E278F0998008D2B4D /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		9C4995352796B0300076FBF8 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataManager.swift; path = ShakeMe/DataManager.swift; sourceTree = SOURCE_ROOT; };
+		9C7F30E127980CFD0008D649 /* AddDefaultAnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDefaultAnswerViewController.swift; sourceTree = "<group>"; };
 		9C886127278F0998008D2B4D /* ShakeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShakeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C88612A278F0998008D2B4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C88612C278F0998008D2B4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				9C88612E278F0998008D2B4D /* MainViewController.swift */,
 				9C88614127902EE0008D2B4D /* SettingsViewController.swift */,
 				9C886130278F0998008D2B4D /* Main.storyboard */,
+				9C7F30E127980CFD0008D649 /* AddDefaultAnswerViewController.swift */,
 				9C886133278F099A008D2B4D /* Assets.xcassets */,
 				9C886135278F099A008D2B4D /* LaunchScreen.storyboard */,
 				9C886138278F099A008D2B4D /* Info.plist */,
@@ -162,6 +165,7 @@
 				9C88614027902E53008D2B4D /* Message.swift in Sources */,
 				9C88612B278F0998008D2B4D /* AppDelegate.swift in Sources */,
 				9C4995362796B0300076FBF8 /* DataManager.swift in Sources */,
+				9C7F30E227980CFD0008D649 /* AddDefaultAnswerViewController.swift in Sources */,
 				9C88614227902EE0008D2B4D /* SettingsViewController.swift in Sources */,
 				9C88612D278F0998008D2B4D /* SceneDelegate.swift in Sources */,
 				9C88614427931A28008D2B4D /* Constants.swift in Sources */,

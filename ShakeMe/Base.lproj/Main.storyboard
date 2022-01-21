@@ -25,7 +25,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system"/>
                                 <connections>
-                                    <action selector="addButtonTapped:" destination="fkk-Q7-6mF" eventType="touchUpInside" id="sbH-SX-tbV"/>
+                                    <segue destination="5UK-b3-anL" kind="presentation" id="QLN-2W-iT8"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lh7-9H-CU8">
@@ -115,6 +115,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sut-NC-HO3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1237.68115942029" y="-368.30357142857139"/>
+        </scene>
+        <!--Add Default Answer View Controller-->
+        <scene sceneID="JPN-oy-4fv">
+            <objects>
+                <viewController id="5UK-b3-anL" customClass="AddDefaultAnswerViewController" customModule="ShakeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hHg-rh-bfp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nvB-OG-kSz">
+                                <rect key="frame" x="20" y="86" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPn-dw-J3V">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Add answer" id="Ui3-uc-4Wa">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kkq-6t-Ppu">
+                                            <connections>
+                                                <segue destination="sKC-xq-bpo" kind="unwind" identifier="cancelSeque" unwindAction="cancelWithSegue:" id="jrB-rX-4y4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="UGC-4X-mJ5">
+                                            <connections>
+                                                <segue destination="sKC-xq-bpo" kind="unwind" identifier="doneSeque" unwindAction="doneWithSegue:" id="CUr-vU-JOS"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OWa-uR-wQJ">
+                                <rect key="frame" x="20" y="150" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ill-BB-bha"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QPn-dw-J3V" firstAttribute="leading" secondItem="Ill-BB-bha" secondAttribute="leading" id="6hn-yz-uD6"/>
+                            <constraint firstItem="QPn-dw-J3V" firstAttribute="trailing" secondItem="Ill-BB-bha" secondAttribute="trailing" id="8Aj-3A-DUp"/>
+                            <constraint firstItem="OWa-uR-wQJ" firstAttribute="leading" secondItem="Ill-BB-bha" secondAttribute="leading" constant="20" id="AMX-Fs-Nca"/>
+                            <constraint firstItem="nvB-OG-kSz" firstAttribute="leading" secondItem="Ill-BB-bha" secondAttribute="leading" constant="20" id="LQG-2q-Ik1"/>
+                            <constraint firstItem="nvB-OG-kSz" firstAttribute="top" secondItem="QPn-dw-J3V" secondAttribute="bottom" constant="30" id="eBe-EO-xXj"/>
+                            <constraint firstItem="Ill-BB-bha" firstAttribute="trailing" secondItem="OWa-uR-wQJ" secondAttribute="trailing" constant="20" id="jgv-sa-hL4"/>
+                            <constraint firstItem="Ill-BB-bha" firstAttribute="trailing" secondItem="nvB-OG-kSz" secondAttribute="trailing" constant="20" id="lG1-Sp-cgS"/>
+                            <constraint firstItem="OWa-uR-wQJ" firstAttribute="top" secondItem="nvB-OG-kSz" secondAttribute="bottom" constant="30" id="pKY-I2-zq2"/>
+                            <constraint firstItem="QPn-dw-J3V" firstAttribute="top" secondItem="Ill-BB-bha" secondAttribute="top" id="tne-aW-CI9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="answerTextField" destination="nvB-OG-kSz" id="vsN-vj-apF"/>
+                        <outlet property="typeTextField" destination="OWa-uR-wQJ" id="RRJ-mC-xKy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MgG-LR-V0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="sKC-xq-bpo" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2062" y="254"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Kkz-9V-4ad">

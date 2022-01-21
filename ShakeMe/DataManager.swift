@@ -15,14 +15,19 @@ protocol DataManagerDelegate {
 struct DataManager {
     
     var delegate: DataManagerDelegate?
-     
+    let userDefaults = UserDefaults.standard
+
+// MARK: Get data from network
     func fetchData() {
+        
         let path = Const.urlString + Const.userQuestion
-        let urlString = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
+        guard let urlString = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            self.delegate?.didFailWithError(error: "Can not create url string from \(path)")
+            return
+        }
         
-        ///FORCE UNWRAP!!
-        if let url = URL(string: urlString!) {
+        if let url = URL(string: urlString) {
                     let session = URLSession(configuration: .default)
                     let task = session.dataTask(with: url) { (data, response, error) in
                         if error != nil {
@@ -52,5 +57,34 @@ struct DataManager {
             }
     }
     
+//MARK: Working with default values
+    
+    func getDefaultMessages() -> [Message]?  {
+
+        if let savedMessages = userDefaults.object(forKey: Const.keyToSaveDefaultMessages) as? Data {
+            let decoder = JSONDecoder()
+            if let loadedMessages = try? decoder.decode(Array.self, from: savedMessages) as [Message] {
+                        return loadedMessages
+                     } else {
+                        return nil
+                     }
+                  } else {
+                      return nil
+                        }
+    }
+    
+    func saveDefaultMessages(messageArray: [Message]?) {
+        if messageArray != nil {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(messageArray) {
+                userDefaults.set(encoded, forKey: Const.keyToSaveDefaultMessages)
+            }
+        } else {
+            userDefaults.set(nil, forKey: Const.keyToSaveDefaultMessages)
+        }
+    }
 }
 
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Message: Codable {
     var question: String? = nil
@@ -19,10 +20,16 @@ struct Answer: Codable {
     var magic: Message
 }
  
-enum answerType: String, Codable 
+enum answerType: String, Codable, CaseIterable
 {
     case neutral = "Neutral"
     case contrary = "Contrary"
     case affirmative = "Affirmative"
+    var color: UIColor {
+        switch self {
+            case .neutral: return UIColor.yellow
+            case .contrary: return UIColor.red
+            case .affirmative: return UIColor.green
+    }}
 }
 
