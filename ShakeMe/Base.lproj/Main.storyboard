@@ -96,18 +96,28 @@
                                     <action selector="okButtonTapped:" destination="rSq-6a-WJn" eventType="touchUpInside" id="rAW-iY-e3N"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="aJq-90-4dC">
+                                <rect key="frame" x="147" y="388" width="120" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="oqp-eK-tue"/>
+                                    <constraint firstAttribute="height" constant="120" id="xhK-rD-01j"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mNx-Pb-719"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cU9-zb-G9O" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="a6w-6J-dVF"/>
+                            <constraint firstItem="aJq-90-4dC" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="Elf-Vt-1ve"/>
                             <constraint firstItem="cU9-zb-G9O" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="bRg-h8-ikp"/>
+                            <constraint firstItem="cU9-zb-G9O" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="fjp-BC-CzY"/>
+                            <constraint firstItem="aJq-90-4dC" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="gYY-LE-2Kf"/>
                             <constraint firstItem="mNx-Pb-719" firstAttribute="bottom" secondItem="gI8-7p-mvy" secondAttribute="bottom" constant="38" id="n9d-Tb-ZU9"/>
                             <constraint firstItem="gI8-7p-mvy" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="nxw-Bh-aoZ"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" selectedImage="house" catalog="system" id="LsH-Sl-x9B"/>
                     <connections>
+                        <outlet property="activityIndicatior" destination="aJq-90-4dC" id="OCt-La-GMb"/>
                         <outlet property="answerText" destination="cU9-zb-G9O" id="O66-pe-NsU"/>
                         <outlet property="okButton" destination="gI8-7p-mvy" id="TU1-1K-OmE"/>
                     </connections>
