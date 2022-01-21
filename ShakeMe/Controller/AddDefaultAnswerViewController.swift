@@ -8,10 +8,7 @@
 import Foundation
 import UIKit
 
-//https://www.ioscreator.com/tutorials/add-rows-table-view-ios-tutorial
-
 class AddDefaultAnswerViewController: UIViewController{
-    
     
     @IBOutlet weak var answerTextField:UITextField!
     @IBOutlet weak var typeTextField:UITextField!
@@ -21,7 +18,6 @@ class AddDefaultAnswerViewController: UIViewController{
     
     var answerText = ""
     var typeText = ""
-    //var answerType =
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,14 +47,12 @@ class AddDefaultAnswerViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "doneSeque" {
             answerText = answerTextField.text!
-            typeText = typeTextField.text! 
-            //create message object
-        } else {
-            print(segue.identifier)
+            typeText = typeTextField.text!
         }
     }
 }
 
+//MARK: Setup PickerView
 extension AddDefaultAnswerViewController: UIPickerViewDelegate, UIPickerViewDataSource
 {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -80,6 +74,8 @@ extension AddDefaultAnswerViewController: UIPickerViewDelegate, UIPickerViewData
 }
 
 
+//MARK: Handle answer type
+//Answer type must have value from enum. If another value was typed we clear textfield
 extension AddDefaultAnswerViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
 //Check if type value is in enum

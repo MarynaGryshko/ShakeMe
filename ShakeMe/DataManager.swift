@@ -17,7 +17,7 @@ struct DataManager {
     var delegate: DataManagerDelegate?
     let userDefaults = UserDefaults.standard
 
-// MARK: Get data from network
+// MARK: Get data from network of defaults
     func fetchData() {
         
         let path = Const.urlString + Const.userQuestion
@@ -31,21 +31,24 @@ struct DataManager {
                     let session = URLSession(configuration: .default)
                     let task = session.dataTask(with: url) { (data, response, error) in
                         if error != nil {
-                            self.delegate?.didFailWithError(error: error!)
-                            print(error)
+                           // print(error)*/
+                            if let message = self.getHardcodedAnswer() {
+                                self.delegate?.didUpdateData(self, message: message)
+                            }
                             return
                         }
                         if let safeData = data {
                             if let message = self.parseJSON(data: safeData) {
                                 self.delegate?.didUpdateData(self, message: message)
                             }
-                            print(data)
+                            //print(data)
                         }
                     }
                     task.resume()
                 }
     }
-    
+
+//Decode JSON object, create array of messages
     func parseJSON(data: Data) -> Message? {
         let decoder = JSONDecoder()
         do {
@@ -57,8 +60,11 @@ struct DataManager {
             }
     }
     
-//MARK: Working with default values
     
+    
+//MARK: Working with default values
+  
+//Get hardcoded messages from userDefaults
     func getDefaultMessages() -> [Message]?  {
 
         if let savedMessages = userDefaults.object(forKey: Const.keyToSaveDefaultMessages) as? Data {
@@ -72,7 +78,8 @@ struct DataManager {
                       return nil
                         }
     }
-    
+
+//Save hardcoded messages to userDefaults
     func saveDefaultMessages(messageArray: [Message]?) {
         if messageArray != nil {
             let encoder = JSONEncoder()
@@ -82,6 +89,12 @@ struct DataManager {
         } else {
             userDefaults.set(nil, forKey: Const.keyToSaveDefaultMessages)
         }
+    }
+
+//Get random answer from hardcoded
+    func getHardcodedAnswer() -> Message? {
+        let message = getDefaultMessages()?.randomElement()
+        return message
     }
 }
 

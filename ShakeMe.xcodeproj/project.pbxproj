@@ -47,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C3CB83A279B0DCE002FE192 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9C88612E278F0998008D2B4D /* MainViewController.swift */,
+				9C88614127902EE0008D2B4D /* SettingsViewController.swift */,
+				9C7F30E127980CFD0008D649 /* AddDefaultAnswerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		9C88611E278F0997008D2B4D = {
 			isa = PBXGroup;
 			children = (
@@ -69,10 +79,8 @@
 				9C88613E27902E38008D2B4D /* Model */,
 				9C88612A278F0998008D2B4D /* AppDelegate.swift */,
 				9C88612C278F0998008D2B4D /* SceneDelegate.swift */,
-				9C88612E278F0998008D2B4D /* MainViewController.swift */,
-				9C88614127902EE0008D2B4D /* SettingsViewController.swift */,
+				9C3CB83A279B0DCE002FE192 /* Controller */,
 				9C886130278F0998008D2B4D /* Main.storyboard */,
-				9C7F30E127980CFD0008D649 /* AddDefaultAnswerViewController.swift */,
 				9C886133278F099A008D2B4D /* Assets.xcassets */,
 				9C886135278F099A008D2B4D /* LaunchScreen.storyboard */,
 				9C886138278F099A008D2B4D /* Info.plist */,

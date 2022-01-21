@@ -24,14 +24,15 @@ class MainViewController: UIViewController {
         activityIndicatior.style = .large
     }
 
-    // We are willing to become first responder to get shake motion
+//MARK: Shake handling
+// We are willing to become first responder to get shake motion
     override var canBecomeFirstResponder: Bool {
             get {
                 return true
             }
         }
     
-    // Detect shake gesture
+// Detect shake gesture
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         print("motionBegan")
     }
@@ -48,7 +49,8 @@ class MainViewController: UIViewController {
             dataManager.fetchData()
             }
     }
-    
+
+//User see and accepts answer
     @IBAction func okButtonTapped(_ sender:UIButton ) {
         okButton.isHidden = true
         answerText.isHidden = false
@@ -69,7 +71,7 @@ extension MainViewController: DataManagerDelegate {
             self.okButton.isHidden = false
         }
     }
-    
+
     func didFailWithError(error: Error) {
         print(error)
     }

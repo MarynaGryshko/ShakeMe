@@ -13,12 +13,13 @@ class SettingsViewController: UIViewController
     var messages: [Message]?// = [Message(answer: "Just do it!"),Message(answer: "Never give up!"), Message(answer: "Believe in yourself!"), Message(answer: "Don't touch it!")]
     
     let dataManager = DataManager()
-    
     var newAnswerText = ""
     var newAnswerType = ""
     
     @IBOutlet weak var tableView: UITableView!
 
+//MARK: View lifecycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -30,18 +31,6 @@ class SettingsViewController: UIViewController
         if let array = messages {
             dataManager.saveDefaultMessages(messageArray: array)
         }
-    }
-    
-//MARK: Handling default messages
-    func loadDefaultData(){
-        guard let loadedMessages = dataManager.getDefaultMessages() else {
-            return
-        }
-        messages = loadedMessages
-    }
-    
-    func saveDefaultData() {
-        dataManager.saveDefaultMessages(messageArray: messages)
     }
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
@@ -59,6 +48,21 @@ class SettingsViewController: UIViewController
         }
         self.tableView.reloadData()
     }
+}
+
+//MARK: Handling default messages
+extension SettingsViewController {
+      
+    func loadDefaultData(){
+            guard let loadedMessages = dataManager.getDefaultMessages() else {
+                return
+            }
+            messages = loadedMessages
+        }
+        
+    func saveDefaultData() {
+            dataManager.saveDefaultMessages(messageArray: messages)
+        }
 }
 
 // MARK: tableView functionality
@@ -84,7 +88,7 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     
-    //Delete item 
+//Delete item
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if messages != nil {
