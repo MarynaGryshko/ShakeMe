@@ -30,6 +30,7 @@ class AddDefaultAnswerViewController: UIViewController{
         typeTextField.delegate = self
 
         answerTextField.placeholder = "Answer text"
+        typeTextField.text = answerTypes.first
 
     }
     

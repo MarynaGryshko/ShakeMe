@@ -38,15 +38,17 @@ class SettingsViewController: UIViewController
 
     @IBAction func done(segue:UIStoryboardSegue) {
         let addDefaultAnswerVC = segue.source as! AddDefaultAnswerViewController
-        newAnswerText = addDefaultAnswerVC.answerText
-        newAnswerType = addDefaultAnswerVC.typeText
-        let message = Message(answer: newAnswerText, type: newAnswerType)
-        if self.messages != nil {
-            self.messages!.append(message)
-        } else {
-            self.messages = [message]
+        if addDefaultAnswerVC.answerText != ""
+        {
+            newAnswerType = addDefaultAnswerVC.typeText
+            let message = Message(answer: newAnswerText, type: newAnswerType)
+            if self.messages != nil {
+                self.messages!.append(message)
+            } else {
+                self.messages = [message]
+            }
+            self.tableView.reloadData()
         }
-        self.tableView.reloadData()
     }
 }
 

@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -62,7 +63,10 @@
                             <constraint firstItem="lh7-9H-CU8" firstAttribute="top" secondItem="euM-w1-otW" secondAttribute="top" constant="49" id="v0F-rz-gjY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" selectedImage="square.and.pencil" catalog="system" id="0YF-e3-e3S"/>
+                    <tabBarItem key="tabBarItem" title="Settings" id="0YF-e3-e3S">
+                        <imageReference key="image" image="pencil.circle" catalog="system" symbolScale="large"/>
+                        <imageReference key="selectedImage" image="pencil.circle.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="tableView" destination="lh7-9H-CU8" id="msf-Te-APJ"/>
                     </connections>
@@ -80,18 +84,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shake Me To Get An Answer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cU9-zb-G9O">
-                                <rect key="frame" x="55" y="433" width="304" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <rect key="frame" x="48.5" y="201" width="317" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gI8-7p-mvy">
-                                <rect key="frame" x="173.5" y="744" width="67" height="31"/>
+                                <rect key="frame" x="157" y="665" width="100" height="52"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="67" id="uIU-Qe-6ir"/>
+                                    <constraint firstAttribute="height" constant="52" id="Auc-Re-9WI"/>
+                                    <constraint firstAttribute="width" constant="100" id="uIU-Qe-6ir"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Ok"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Ok">
+                                    <backgroundConfiguration key="background" cornerRadius="6">
+                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                    </backgroundConfiguration>
+                                    <fontDescription key="titleFontDescription" type="system" weight="heavy" pointSize="30"/>
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="okButtonTapped:" destination="rSq-6a-WJn" eventType="touchUpInside" id="rAW-iY-e3N"/>
                                 </connections>
@@ -103,22 +114,36 @@
                                     <constraint firstAttribute="height" constant="120" id="xhK-rD-01j"/>
                                 </constraints>
                             </activityIndicatorView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="oTa-C4-dXA">
+                                <rect key="frame" x="40" y="281" width="334" height="334"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oTa-C4-dXA" secondAttribute="height" multiplier="1:1" id="c7S-Jw-bTO"/>
+                                    <constraint firstAttribute="width" secondItem="oTa-C4-dXA" secondAttribute="height" multiplier="1:1" id="wIz-gO-jGs"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mNx-Pb-719"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="oTa-C4-dXA" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="7cX-ZL-ibX"/>
+                            <constraint firstItem="oTa-C4-dXA" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="BY1-qW-4cu"/>
+                            <constraint firstItem="gI8-7p-mvy" firstAttribute="top" secondItem="oTa-C4-dXA" secondAttribute="bottom" constant="50" id="E6P-5P-wGo"/>
                             <constraint firstItem="aJq-90-4dC" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="Elf-Vt-1ve"/>
                             <constraint firstItem="cU9-zb-G9O" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="bRg-h8-ikp"/>
-                            <constraint firstItem="cU9-zb-G9O" firstAttribute="centerY" secondItem="5S2-kr-1L8" secondAttribute="centerY" id="fjp-BC-CzY"/>
+                            <constraint firstItem="mNx-Pb-719" firstAttribute="trailing" secondItem="oTa-C4-dXA" secondAttribute="trailing" constant="40" id="dSK-vJ-mbS"/>
+                            <constraint firstItem="gI8-7p-mvy" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="dXM-dT-ftT"/>
                             <constraint firstItem="aJq-90-4dC" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="gYY-LE-2Kf"/>
-                            <constraint firstItem="mNx-Pb-719" firstAttribute="bottom" secondItem="gI8-7p-mvy" secondAttribute="bottom" constant="38" id="n9d-Tb-ZU9"/>
-                            <constraint firstItem="gI8-7p-mvy" firstAttribute="centerX" secondItem="5S2-kr-1L8" secondAttribute="centerX" id="nxw-Bh-aoZ"/>
+                            <constraint firstItem="oTa-C4-dXA" firstAttribute="top" secondItem="cU9-zb-G9O" secondAttribute="bottom" constant="50" id="hrM-Jl-Pvo"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" selectedImage="house" catalog="system" id="LsH-Sl-x9B"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="LsH-Sl-x9B">
+                        <imageReference key="image" image="house" catalog="system" symbolScale="large"/>
+                        <imageReference key="selectedImage" image="house.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="activityIndicatior" destination="aJq-90-4dC" id="OCt-La-GMb"/>
                         <outlet property="answerText" destination="cU9-zb-G9O" id="O66-pe-NsU"/>
+                        <outlet property="ballImageView" destination="oTa-C4-dXA" id="0TE-f6-y2b"/>
                         <outlet property="okButton" destination="gI8-7p-mvy" id="TU1-1K-OmE"/>
                     </connections>
                 </viewController>
@@ -206,11 +231,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ball" width="256" height="256"/>
         <image name="house" catalog="system" width="128" height="106"/>
+        <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="pencil.circle" catalog="system" width="128" height="121"/>
+        <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

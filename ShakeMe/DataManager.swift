@@ -34,6 +34,8 @@ struct DataManager {
                            // print(error)*/
                             if let message = self.getHardcodedAnswer() {
                                 self.delegate?.didUpdateData(self, message: message)
+                            } else {
+                                self.delegate?.didFailWithError(error: Const.noDataErrorDescription)
                             }
                             return
                         }
