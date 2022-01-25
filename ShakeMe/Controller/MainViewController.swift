@@ -17,9 +17,12 @@ class MainViewController: UIViewController {
     var dataManager = DataManager()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.becomeFirstResponder()
         dataManager.delegate = self
+        
+        //set default screen paremeters
         okButton.isHidden = true
         activityIndicatior.isHidden = true
         activityIndicatior.style = .large
@@ -36,21 +39,15 @@ class MainViewController: UIViewController {
         }
     
 // Detect shake gesture
-    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        print("motionBegan")
-        //answerText.shake()
-    }
-    
-    override func motionCancelled(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        print("motionCancelled")
-    }
-    
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
+            
+            //set screen parameters to show an answer
             answerText.isHidden = true
             ballImageView.isHidden = true
             activityIndicatior.isHidden = false
             activityIndicatior.startAnimating()
+            
             dataManager.fetchData()
             }
     }
@@ -60,6 +57,7 @@ class MainViewController: UIViewController {
         okButton.isHidden = true
         answerText.isHidden = false
         answerText.text = Const.defaultAnswerText
+        self.answerText.textColor = .label
         ballImageView.image = UIImage(named: Const.defaultBallImageName)
     }
 }
@@ -69,14 +67,12 @@ class MainViewController: UIViewController {
 extension MainViewController: DataManagerDelegate {
     
     func didUpdateData(_ dataManager: DataManager, message: Message) {
+       
+        //set screen parameters and show an answer
         DispatchQueue.main.async {
-            self.activityIndicatior.stopAnimating()
-            self.activityIndicatior.isHidden = true
-            self.answerText.isHidden = false
+            self.hideActivityIndicator()
             self.answerText.text = message.answer
-            self.okButton.isHidden = false
             var ballToShowImageName = ""
-            self.ballImageView.isHidden = false
             switch message.type {
                 case answerType.neutral.rawValue: ballToShowImageName = Const.neutralBallImageName
                 case answerType.contrary.rawValue: ballToShowImageName = Const.contraryBallImageName
@@ -88,21 +84,26 @@ extension MainViewController: DataManagerDelegate {
     }
 
     func didFailWithError(error: Error) {
-        print(error)
+        //print(error)
+        //show error if it is not possible to fetch answer from the internet and from hardcoded
         if error.localizedDescription == Const.noDataErrorDescription {
             print("sdas")
+            DispatchQueue.main.async {
+               //set screen to show error description
+                self.hideActivityIndicator()
+                self.answerText.text = Const.noDataErrorDescription
+                self.answerText.textColor = .systemRed
+            }
         }
     }
-}
-/*
-extension UIView {
-    func shake(){
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.07
-        animation.repeatCount = 3
-        animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: self.center.x - 10, y: self.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: self.center.x + 10, y: self.center.y))
-        self.layer.add(animation, forKey: "position")
+    
+    func hideActivityIndicator()
+    {
+        self.activityIndicatior.stopAnimating()
+        self.activityIndicatior.isHidden = true
+        self.answerText.isHidden = false
+        self.ballImageView.isHidden = false
+        self.okButton.isHidden = false
     }
-}*/
+}
+
