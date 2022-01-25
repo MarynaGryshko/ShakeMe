@@ -13,8 +13,8 @@ class SettingsViewController: UIViewController
     var messages: [Message]?// = [Message(answer: "Just do it!"),Message(answer: "Never give up!"), Message(answer: "Believe in yourself!"), Message(answer: "Don't touch it!")]
     
     let dataManager = DataManager()
-    var newAnswerText = ""
-    var newAnswerType = ""
+    //var newAnswerText = ""
+    //var newAnswerType = ""
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -40,7 +40,8 @@ class SettingsViewController: UIViewController
         let addDefaultAnswerVC = segue.source as! AddDefaultAnswerViewController
         if addDefaultAnswerVC.answerText != ""
         {
-            newAnswerType = addDefaultAnswerVC.typeText
+            let newAnswerType = addDefaultAnswerVC.typeText
+            let newAnswerText = addDefaultAnswerVC.answerText
             let message = Message(answer: newAnswerText, type: newAnswerType)
             if self.messages != nil {
                 self.messages!.append(message)
@@ -48,6 +49,7 @@ class SettingsViewController: UIViewController
                 self.messages = [message]
             }
             self.tableView.reloadData()
+            saveDefaultData()
         }
     }
 }
