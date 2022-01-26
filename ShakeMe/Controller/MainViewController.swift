@@ -50,16 +50,17 @@ class MainViewController: UIViewController {
     func setDefaultScreen() {
         //set default screen paremeters
         setScreenWithTextAndImage(text: Const.defaultAnswerText, image: UIImage(named: Const.defaultBallImageName))
+        self.okButton.isHidden = true
     }
     
     func setScreenWithTextAndImage(text:String?, image:UIImage?) {
-        self.okButton.isHidden = true
         self.activityIndicatior.isHidden = true
         self.ballImageView.isHidden = false
         self.answerText.isHidden = false
         self.answerText.textColor = .label
         answerText.text = text
         ballImageView.image = image
+        self.okButton.isHidden = false
     }
     
     func setActivityIndicatorScreen() {
@@ -105,8 +106,7 @@ extension MainViewController: DataManagerDelegate {
             DispatchQueue.main.async {
                //set screen to show error description
                 self.hideActivityIndicator()
-                self.setDefaultScreen()
-                self.answerText.text = Const.noDataErrorDescription
+                self.setScreenWithTextAndImage(text: Const.noDataErrorDescription, image: UIImage(named: Const.defaultBallImageName))
                 self.answerText.textColor = .systemRed
             }
         }
