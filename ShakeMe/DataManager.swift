@@ -31,7 +31,6 @@ struct DataManager {
                     let session = URLSession(configuration: .default)
                     let task = session.dataTask(with: url) { (data, response, error) in
                         if error != nil {
-                           // print(error)*/
                             if let message = self.getHardcodedAnswer() {
                                 self.delegate?.didUpdateData(self, message: message)
                             } else {
@@ -43,7 +42,6 @@ struct DataManager {
                             if let message = self.parseJSON(data: safeData) {
                                 self.delegate?.didUpdateData(self, message: message)
                             }
-                            //print(data)
                         }
                     }
                     task.resume()

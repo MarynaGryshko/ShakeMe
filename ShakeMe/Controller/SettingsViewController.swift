@@ -10,11 +10,9 @@ import UIKit
 
 class SettingsViewController: UIViewController
 {
-    var messages: [Message]?// = [Message(answer: "Just do it!"),Message(answer: "Never give up!"), Message(answer: "Believe in yourself!"), Message(answer: "Don't touch it!")]
+    var messages: [Message]?
     
     let dataManager = DataManager()
-    //var newAnswerText = ""
-    //var newAnswerType = ""
     
     @IBOutlet weak var tableView: UITableView!
 

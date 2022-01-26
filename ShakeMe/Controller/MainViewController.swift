@@ -20,14 +20,9 @@ class MainViewController: UIViewController {
         
         super.viewDidLoad()
         self.becomeFirstResponder()
-        dataManager.delegate = self
-        
-        //set default screen paremeters
-        okButton.isHidden = true
-        activityIndicatior.isHidden = true
-        activityIndicatior.style = .large
         self.view.backgroundColor = Const.backgroundColor
-       
+        dataManager.delegate = self
+        setDefaultScreen()
     }
 
 //MARK: Shake handling
@@ -41,25 +36,47 @@ class MainViewController: UIViewController {
 // Detect shake gesture
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            
-            //set screen parameters to show an answer
-            answerText.isHidden = true
-            ballImageView.isHidden = true
-            activityIndicatior.isHidden = false
-            activityIndicatior.startAnimating()
-            
+            setActivityIndicatorScreen()
             dataManager.fetchData()
             }
     }
 
 //User see and accepts an answer
     @IBAction func okButtonTapped(_ sender:UIButton ) {
-        okButton.isHidden = true
-        answerText.isHidden = false
-        answerText.text = Const.defaultAnswerText
-        self.answerText.textColor = .label
-        ballImageView.image = UIImage(named: Const.defaultBallImageName)
+        setDefaultScreen()
     }
+
+//MARK: modify screen
+    func setDefaultScreen() {
+        //set default screen paremeters
+        setScreenWithTextAndImage(text: Const.defaultAnswerText, image: UIImage(named: Const.defaultBallImageName))
+    }
+    
+    func setScreenWithTextAndImage(text:String?, image:UIImage?) {
+        self.okButton.isHidden = true
+        self.activityIndicatior.isHidden = true
+        self.ballImageView.isHidden = false
+        self.answerText.isHidden = false
+        self.answerText.textColor = .label
+        answerText.text = text
+        ballImageView.image = image
+    }
+    
+    func setActivityIndicatorScreen() {
+        //set screen parameters to show an answer
+        self.answerText.isHidden = true
+        self.ballImageView.isHidden = true
+        self.activityIndicatior.isHidden = false
+        self.activityIndicatior.startAnimating()
+    }
+    
+    func hideActivityIndicator()
+    {
+        self.activityIndicatior.stopAnimating()
+        self.activityIndicatior.isHidden = true
+        self.okButton.isHidden = false
+    }
+
 }
 
 //MARK: DataManagerDelegate
@@ -71,7 +88,6 @@ extension MainViewController: DataManagerDelegate {
         //set screen parameters and show an answer
         DispatchQueue.main.async {
             self.hideActivityIndicator()
-            self.answerText.text = message.answer
             var ballToShowImageName = ""
             switch message.type {
                 case answerType.neutral.rawValue: ballToShowImageName = Const.neutralBallImageName
@@ -79,31 +95,23 @@ extension MainViewController: DataManagerDelegate {
                 case answerType.affirmative.rawValue: ballToShowImageName = Const.affirmativeBallImageName
                 default: ballToShowImageName = Const.defaultBallImageName
             }
-            self.ballImageView.image = UIImage(named: ballToShowImageName)
+            self.setScreenWithTextAndImage(text: message.answer, image: UIImage(named: ballToShowImageName))
         }
     }
 
     func didFailWithError(error: Error) {
-        //print(error)
         //show error if it is not possible to fetch answer from the internet and from hardcoded
         if error.localizedDescription == Const.noDataErrorDescription {
-            print("sdas")
             DispatchQueue.main.async {
                //set screen to show error description
                 self.hideActivityIndicator()
+                self.setDefaultScreen()
                 self.answerText.text = Const.noDataErrorDescription
                 self.answerText.textColor = .systemRed
             }
         }
     }
     
-    func hideActivityIndicator()
-    {
-        self.activityIndicatior.stopAnimating()
-        self.activityIndicatior.isHidden = true
-        self.answerText.isHidden = false
-        self.ballImageView.isHidden = false
-        self.okButton.isHidden = false
-    }
+
 }
 
