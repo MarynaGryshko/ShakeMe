@@ -18,7 +18,7 @@ struct Message: Codable {
 struct Answer: Codable {
     var magic: Message
 }
- 
+
 enum answerType: String, Codable, CaseIterable
 {
     case neutral = "Neutral"
@@ -27,10 +27,10 @@ enum answerType: String, Codable, CaseIterable
     
     var color: UIColor {
         switch self {
-            case .neutral: return UIColor.yellow
-            case .contrary: return UIColor.red
-            case .affirmative: return UIColor.green
-            }
+        case .neutral: return UIColor.yellow
+        case .contrary: return UIColor.red
+        case .affirmative: return UIColor.green
+        }
     }
 }
 

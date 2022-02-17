@@ -15,12 +15,12 @@ protocol DataManagerDelegate {
 struct DataManager {
     
     var delegate: DataManagerDelegate?
-    let userDefaults = UserDefaults.standard
-
-// MARK: Get data from network of defaults
+    private let userDefaults = UserDefaults.standard
+    
+    //MARK: Get data from network of defaults
     func fetchData() {
         
-        let path = Const.urlString + Const.userQuestion
+        let path = ConstData.urlString + ConstData.userQuestion
         
         guard let urlString = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             self.delegate?.didFailWithError(error: "Can not create url string from \(path)")
@@ -28,71 +28,71 @@ struct DataManager {
         }
         
         if let url = URL(string: urlString) {
-                    let session = URLSession(configuration: .default)
-                    let task = session.dataTask(with: url) { (data, response, error) in
-                        if error != nil {
-                            if let message = self.getHardcodedAnswer() {
-                                self.delegate?.didUpdateData(self, message: message)
-                            } else {
-                                self.delegate?.didFailWithError(error: Const.noDataErrorDescription)
-                            }
-                            return
-                        }
-                        if let safeData = data {
-                            if let message = self.parseJSON(data: safeData) {
-                                self.delegate?.didUpdateData(self, message: message)
-                            }
-                        }
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    if let message = self.getHardcodedAnswer() {
+                        self.delegate?.didUpdateData(self, message: message)
+                    } else {
+                        self.delegate?.didFailWithError(error: ConstData.noDataErrorDescription)
                     }
-                    task.resume()
+                    return
                 }
+                if let safeData = data {
+                    if let message = self.parseJSON(data: safeData) {
+                        self.delegate?.didUpdateData(self, message: message)
+                    }
+                }
+            }
+            task.resume()
+        }
     }
-
-//Decode JSON object, create array of messages
-    func parseJSON(data: Data) -> Message? {
+    
+    //Decode JSON object, create array of messages
+    private func parseJSON(data: Data) -> Message? {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(Answer.self, from: data)
             return decodedData.magic
-            } catch {
-                delegate?.didFailWithError(error: error)
-                return nil
-            }
+        } catch {
+            delegate?.didFailWithError(error: error)
+            return nil
+        }
     }
     
     
     
-//MARK: Working with default values
-  
-//Get hardcoded messages from userDefaults
+    //MARK: Working with default values
+    
+    //Get hardcoded messages from userDefaults
     func getDefaultMessages() -> [Message]?  {
-
-        if let savedMessages = userDefaults.object(forKey: Const.keyToSaveDefaultMessages) as? Data {
+        
+        if let savedMessages = userDefaults.object(forKey: ConstData.keyToSaveDefaultMessages) as? Data {
             let decoder = JSONDecoder()
             if let loadedMessages = try? decoder.decode(Array.self, from: savedMessages) as [Message] {
-                        return loadedMessages
-                     } else {
-                        return nil
-                     }
-                  } else {
-                      return nil
-                        }
+                return loadedMessages
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
-
-//Save hardcoded messages to userDefaults
+    
+    //Save hardcoded messages to userDefaults
     func saveDefaultMessages(messageArray: [Message]?) {
         if messageArray != nil {
             let encoder = JSONEncoder()
             if let encoded = try? encoder.encode(messageArray) {
-                userDefaults.set(encoded, forKey: Const.keyToSaveDefaultMessages)
+                userDefaults.set(encoded, forKey: ConstData.keyToSaveDefaultMessages)
             }
         } else {
-            userDefaults.set(nil, forKey: Const.keyToSaveDefaultMessages)
+            userDefaults.set(nil, forKey: ConstData.keyToSaveDefaultMessages)
         }
     }
-
-//Get random answer from hardcoded
-    func getHardcodedAnswer() -> Message? {
+    
+    //Get random answer from hardcoded
+    private func getHardcodedAnswer() -> Message? {
         let message = getDefaultMessages()?.randomElement()
         return message
     }

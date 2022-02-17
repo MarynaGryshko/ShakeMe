@@ -10,13 +10,13 @@ import UIKit
 
 class SettingsViewController: UIViewController
 {
-    var messages: [Message]?
+    private var messages: [Message]?
     
-    let dataManager = DataManager()
+    private let dataManager = DataManager()
     
     @IBOutlet weak var tableView: UITableView!
-
-//MARK: View lifecycle functions
+    
+    //MARK: View lifecycle functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController
         tableView.delegate = self
         loadDefaultData()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         if let array = messages {
             dataManager.saveDefaultMessages(messageArray: array)
@@ -33,7 +33,7 @@ class SettingsViewController: UIViewController
     
     @IBAction func cancel(segue:UIStoryboardSegue) {
     }
-
+    
     @IBAction func done(segue:UIStoryboardSegue) {
         let addDefaultAnswerVC = segue.source as! AddDefaultAnswerViewController
         if addDefaultAnswerVC.answerText != ""
@@ -54,20 +54,20 @@ class SettingsViewController: UIViewController
 
 //MARK: Handling default messages
 extension SettingsViewController {
-      
-    func loadDefaultData(){
-            guard let loadedMessages = dataManager.getDefaultMessages() else {
-                return
-            }
-            messages = loadedMessages
+    
+    private func loadDefaultData(){
+        guard let loadedMessages = dataManager.getDefaultMessages() else {
+            return
         }
-        
-    func saveDefaultData() {
-            dataManager.saveDefaultMessages(messageArray: messages)
-        }
+        messages = loadedMessages
+    }
+    
+    private func saveDefaultData() {
+        dataManager.saveDefaultMessages(messageArray: messages)
+    }
 }
 
-// MARK: tableView functionality
+//MARK: tableView functionality
 
 extension SettingsViewController: UITableViewDataSource {
     
@@ -78,7 +78,7 @@ extension SettingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Const.cellIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConstUI.cellIdentifier, for: indexPath)
         if let answers = messages {
             cell.textLabel?.text = answers[indexPath.row].answer
             let backgroundColor = answerType(rawValue: answers[indexPath.row].type)?.color ?? .clear
@@ -90,14 +90,14 @@ extension SettingsViewController: UITableViewDataSource {
 
 extension SettingsViewController: UITableViewDelegate {
     
-//Delete item
+    //Delete item
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if messages != nil {
                 messages!.remove(at: indexPath.row)
             }
-                }
-                tableView.reloadData()
+        }
+        tableView.reloadData()
     }
 }
 
